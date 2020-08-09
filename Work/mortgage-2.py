@@ -1,4 +1,4 @@
-# exercise 1.9
+# exercise 1.8
 
 principal = 500000.0
 rate = 0.05
