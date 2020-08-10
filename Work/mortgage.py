@@ -12,3 +12,6 @@ while principal > 0:
     total_paid = total_paid + payment
 
 print('Total paid', total_paid)
+
+# exercise 1.17
+print(f'Total amount paid is ${total_paid:0.2f}')
