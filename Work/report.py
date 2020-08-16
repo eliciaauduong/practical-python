@@ -41,7 +41,7 @@ def read_portfolio(filename):
 
 
 portfolio = read_portfolio('Data/portfolio.csv')
-print(portfolio)
+# print(portfolio)
 
 # exercise 2.6
 
@@ -57,25 +57,48 @@ def read_prices(filename):
                 price = row[1]
                 stocks[name] = price
             except:
-                print("empty row")
+                pass
     return stocks
 
 
 prices = read_prices('Data/prices.csv')
-print(prices)
+# print(prices)
 
 
 # exercise 2.7
 # calculate cost
-cost = 0.0
-for p in portfolio:
-    cost += p['price'] * p['shares']
-print("Total cost is", cost)
+# cost = 0.0
+# for p in portfolio:
+#     cost += p['price'] * p['shares']
+# print("Total cost is", cost)
 
-# calculate value
-value = 0.0
-for p in portfolio:
-    value += p['shares'] * float(prices[p['name']])
-print("Total value is", value)
+# # calculate value
+# value = 0.0
+# for p in portfolio:
+#     value += p['shares'] * float(prices[p['name']])
+# print("Total value is", value)
 
-print("Gain or loss is", round(value - cost, ndigits=2))
+# print("Gain or loss is", round(value - cost, ndigits=2))
+
+
+# exercise 2.9
+def make_report(portfolio, prices):
+    data = []
+    for p in portfolio:
+        name = p['name']
+        shares = p['shares']
+        price = float(prices[p['name']])
+        change = float(prices[p['name']]) - p['price']
+        s = (name, shares, price, change)
+        data.append(s)
+    return data
+
+
+# exercise 2.10
+report = make_report(portfolio, prices)
+# exercise 2.11
+headers = ('Name', 'Shares', 'Price', 'Change')
+print('%10s %10s %10s %10s' % headers)
+print('---------- ---------- ---------- -----------')
+for r in report:
+    print('%10s %10d %10.2f %10.2f' % r)
