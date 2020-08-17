@@ -30,13 +30,15 @@ def read_portfolio(filename):
     with open(filename, 'rt') as f:
         rows = csv.reader(f)
         headers = next(rows)
-        name = headers[0]
         for row in rows:
-            dictPortfolio = {}
-            dictPortfolio['name'] = row[0]
-            dictPortfolio['price'] = float(row[2])
-            dictPortfolio['shares'] = int(row[1])
-            portfolio.append(dictPortfolio)
+            # exercise 2.16
+            record = dict(zip(headers, row))
+            stock = {
+                'name': record['name'],
+                'price': float(record['prices']),
+                'shares': int(record['shares'])
+            }
+            portfolio.append(stock)
     return portfolio
 
 

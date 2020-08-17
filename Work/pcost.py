@@ -70,13 +70,18 @@ def portfolio_cost(filename):
     file = open(filename, 'rt')
     rows = csv.reader(file)
     headers = next(rows)
-    cost = 0
-    for row in rows:
+    total_cost = 0
+    for rowno, row in enumerate(rows, start=1):
+        record = dict(zip(headers, row))
         try:
-            cost = cost + (float(row[1]) * float(row[2]))
+            # exercise 2.16
+            nshares = int(record['shares'])
+            price = float(record['price'])
+            total_cost += nshares * price
         except ValueError:
-            print("missing values")
-    return round(cost, ndigits=2)
+            # exercise 2.15
+            print(f"Row {rowno}: Couldn't convert: {row}")
+    return round(total_cost, ndigits=2)
 
 
 if len(sys.argv) == 2:
